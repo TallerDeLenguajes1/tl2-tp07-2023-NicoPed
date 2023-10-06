@@ -31,6 +31,48 @@ public class TareasController : ControllerBase
         }
         return BadRequest("Algo ha salido mal");
     }
+    
+    [HttpGet("GetTareaPorId")]
+    public ActionResult<Tarea> GetTareaPorId(int idTarea){
+        var tareaBuscada = manejoTareas.ObtenerTareaPorId(idTarea);
+        if ( tareaBuscada!= null )
+        {
+            return Ok(tareaBuscada);
+        }
+        return BadRequest("Tarea NO encontrada o inexistente");
+    }
+    
+    [HttpGet("GetTareas")]
+    public ActionResult<IEnumerable<Tarea>> GetTareas(){
+        var listadoDeTareas = manejoTareas.ObtenerTareas;
+        return Ok(listadoDeTareas);
+    }
+    
+    
+    [HttpGet("GetTareasCompletadas")]
+    public ActionResult<IEnumerable<Tarea>> GetTareasCompletadas(){
+        var listadoDeTareas = manejoTareas.ObtenerTareasCompletadas;
+        return Ok(listadoDeTareas);
+    }
+
+    [HttpPut("UpdateTarea")]
+    public ActionResult<Tarea> UpdateTarea(Tarea nuevaTarea){
+        var resultado = manejoTareas.ActualizarTarea(nuevaTarea);
+        if (resultado)
+        {
+            return Ok(nuevaTarea);
+        }
+            return BadRequest("Algo salio mal, compruebe los datos");
+    } 
+    [HttpDelete("DeleteTarea")]
+    public ActionResult<string> DeleteTarea(int idTarea){
+        var resultado = manejoTareas.EliminarTarea(idTarea);
+        if (resultado)
+        {
+            return Ok($"Eliminado tarea de id = {idTarea}");
+        }
+            return BadRequest("Algo salio mal, No se logro eliminar la tarea");
+    }
     // [HttpGet(Name = "GetWeatherForecast")]
     // public IEnumerable<WeatherForecast> Get()
     // {
