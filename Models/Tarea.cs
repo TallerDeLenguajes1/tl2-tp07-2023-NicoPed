@@ -1,7 +1,7 @@
 namespace TPEXTRA.Models;
 
 public class Tarea{
-    private enum EstadoTarea{
+    public enum EstadoTarea{
         Pendiete,
         EnProgreso,
         Completado
@@ -14,5 +14,5 @@ public class Tarea{
     public int Id { get => id; set => id = value; }
     public string Titulo { get => titulo; set => titulo = value; }
     public string Descripcion { get => descripcion; set => descripcion = value; }
-    private EstadoTarea Estado { get => estado; set => estado = value; }
+    public EstadoTarea Estado { get => estado; set => estado = value; }
 }
